@@ -1,50 +1,80 @@
-// Navigation
-function goToSignup() {
-    window.location.href = "signup.html";
+const loginScreen = document.getElementById("loginScreen");
+const forgotScreen = document.getElementById("forgotScreen");
+const signupScreen = document.getElementById("signupScreen");
+const feedback = document.getElementById("feedbackMessage");
+
+function showScreen(screen){
+    loginScreen.classList.add("hidden");
+    forgotScreen.classList.add("hidden");
+    signupScreen.classList.add("hidden");
+    screen.classList.remove("hidden");
+    feedback.textContent = "";
 }
 
-function goToLogin() {
-    window.location.href = "login.html";
+function showMessage(message, error=false){
+    feedback.textContent = message;
+    feedback.style.color = error ? "red" : "green";
 }
 
-// Signup
-const signupForm = document.getElementById("signupForm");
-if (signupForm) {
-    signupForm.addEventListener("submit", function(e) {
-        e.preventDefault();
+document.getElementById("forgotBtnLink").onclick = e => {
+    e.preventDefault();
+    showScreen(forgotScreen);
+};
 
-        const username = document.getElementById("signupUsername").value;
-        const password = document.getElementById("signupPassword").value;
+document.getElementById("toSignupLink").onclick = e => {
+    e.preventDefault();
+    showScreen(signupScreen);
+};
 
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
+document.getElementById("backToLoginFromForgot").onclick = e => {
+    e.preventDefault();
+    showScreen(loginScreen);
+};
 
-        alert("Account created!");
-        window.location.href = "login.html";
-    });
-}
+document.getElementById("toLoginFromSignup").onclick = e => {
+    e.preventDefault();
+    showScreen(loginScreen);
+};
 
-// Login
-const loginForm = document.getElementById("loginForm");
-if (loginForm) {
-    loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
+document.getElementById("loginContinueBtn").onclick = () => {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
 
-        const username = document.getElementById("loginUsername").value;
-        const password = document.getElementById("loginPassword").value;
+    if(email === "" || password === ""){
+        showMessage("Please fill in all fields", true);
+        return;
+    }
 
-        const storedUser = localStorage.getItem("username");
-        const storedPass = localStorage.getItem("password");
+    showMessage("Login successful");
+};
 
-        if (username === storedUser && password === storedPass) {
-            window.location.href = "home.html";
-        } else {
-            alert("Invalid login");
-        }
-    });
-}
+document.getElementById("resetContinueBtn").onclick = () => {
+    const email = document.getElementById("resetEmail").value.trim();
 
-// Logout
-function logout() {
-    window.location.href = "login.html";
-}
+    if(email === ""){
+        showMessage("Enter your email", true);
+        return;
+    }
+
+    showMessage("Password reset link sent");
+};
+
+document.getElementById("signupContinueBtn").onclick = () => {
+    const username = document.getElementById("signupUsername").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
+    const confirm = document.getElementById("signupConfirmPassword").value.trim();
+
+    if(username === "" || email === "" || password === "" || confirm === ""){
+        showMessage("Please fill in all fields", true);
+        return;
+    }
+
+    if(password !== confirm){
+        showMessage("Passwords do not match", true);
+        return;
+    }
+
+    showMessage("Account created successfully");
+    setTimeout(() => showScreen(loginScreen), 1500);
+};
