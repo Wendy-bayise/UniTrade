@@ -99,3 +99,6 @@ The UniTrade platform will:
 •	System design documentation (ER diagrams, Use Case diagrams)
 •	Final project report submitted to Supervisor
 •	Project demonstration / presentation
+
+<img width="2000" height="2000" alt="UniTrade Logo" src="https://github.com/user-attachments/assets/58f8a794-b758-438f-a7e3-9889f4531766" />
+
