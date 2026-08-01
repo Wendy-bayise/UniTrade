@@ -26,7 +26,7 @@ public class Item {
     @Column(nullable = false, length = 60)
     private String category;
 
-    @Column(length = 60)
+    @Column(name = "item_condition", length = 60)
     private String condition;
 
     @Column(nullable = false, precision = 10, scale = 2)

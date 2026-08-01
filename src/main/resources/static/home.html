@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrade | Student Marketplace</title>
+    <meta name="description" content="UniTrade – Buy and sell items within your university community. Find textbooks, electronics, furniture, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a class="nav-brand" href="#" id="brandLink">
+            <img src="logo.png" alt="UniTrade" class="nav-logo" onerror="this.style.display='none'">
+            <span>Marketplace</span>
+        </a>
+        <nav class="nav-links" id="navLinks">
+            <a href="#" class="nav-link active" data-view="products">Products</a>
+            <a href="#" class="nav-link" data-view="sell">Sell</a>
+            <a href="#" class="nav-link" data-view="orders">Orders</a>
+        </nav>
+        <div class="nav-actions" id="navActions">
+            <button class="btn-outline" id="signInBtn">Sign In</button>
+            <button class="btn-filled" id="registerBtn">Register</button>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay hidden" id="authModal">
+    <div class="modal-box" id="authModalBox">
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+
+        <!-- Login Panel -->
+        <div id="loginPanel" class="auth-panel">
+            <div class="auth-logo">
+                <img src="logo.png" alt="UniTrade" onerror="this.style.display='none'">
+                <span class="auth-logo-text">UniTrade</span>
+            </div>
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="auth-subtitle">Sign in to your UniTrade account</p>
+            <div class="auth-form">
+                <div class="field-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="field-input" placeholder="studentnumber@mycput.ac.za">
+                </div>
+                <div class="field-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="pw-wrap">
+                        <input type="password" id="loginPassword" class="field-input" placeholder="Enter password">
+                        <button class="pw-toggle" data-target="loginPassword" type="button" aria-label="Show password"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div id="loginError" class="auth-error hidden"></div>
+                <button class="auth-submit" id="loginSubmit" type="button">
+                    <span class="btn-text">Continue</span>
+                    <span class="btn-spinner hidden"><i class="fas fa-circle-notch fa-spin"></i></span>
+                </button>
+                <div class="auth-links">
+                    <a href="#" id="toForgot">Forgot Password?</a>
+                    <p>Don't have an account? <a href="#" id="toRegister">Sign up</a></p>
+                </div>
+                <p class="auth-terms">By clicking continue, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Register Panel -->
+        <div id="registerPanel" class="auth-panel hidden">
+            <div class="auth-logo">
+                <img src="logo.png" alt="UniTrade" onerror="this.style.display='none'">
+                <span class="auth-logo-text">UniTrade</span>
+            </div>
+            <h2 class="auth-title">Create an account</h2>
+            <p class="auth-subtitle">Join UniTrade today</p>
+            <div class="auth-form">
+                <div class="form-row-2">
+                    <div class="field-group">
+                        <label for="regFirstName">First Name</label>
+                        <input type="text" id="regFirstName" class="field-input" placeholder="John">
+                    </div>
+                    <div class="field-group">
+                        <label for="regLastName">Last Name</label>
+                        <input type="text" id="regLastName" class="field-input" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label for="regEmail">University Email</label>
+                    <input type="email" id="regEmail" class="field-input" placeholder="studentnumber@mycput.ac.za">
+                </div>
+                <div class="field-group">
+                    <label for="regPassword">Password</label>
+                    <div class="pw-wrap">
+                        <input type="password" id="regPassword" class="field-input" placeholder="Create a password">
+                        <button class="pw-toggle" data-target="regPassword" type="button" aria-label="Show password"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <div class="pw-wrap">
+                        <input type="password" id="regConfirmPassword" class="field-input" placeholder="Repeat password">
+                        <button class="pw-toggle" data-target="regConfirmPassword" type="button" aria-label="Show password"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                <div id="regError" class="auth-error hidden"></div>
+                <button class="auth-submit" id="regSubmit" type="button">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-spinner hidden"><i class="fas fa-circle-notch fa-spin"></i></span>
+                </button>
+                <div class="auth-links">
+                    <p>Already have an account? <a href="#" id="toLogin">Sign in</a></p>
+                </div>
+                <p class="auth-terms">By clicking continue, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Forgot Panel -->
+        <div id="forgotPanel" class="auth-panel hidden">
+            <h2 class="auth-title">Reset password</h2>
+            <p class="auth-subtitle">Enter your email to reset your password</p>
+            <div class="auth-form">
+                <div class="field-group">
+                    <label for="forgotEmail">Email address</label>
+                    <input type="email" id="forgotEmail" class="field-input" placeholder="studentnumber@mycput.ac.za">
+                </div>
+                <div id="forgotSuccess" class="auth-success hidden"></div>
+                <button class="auth-submit" id="forgotSubmit" type="button">Continue</button>
+                <div class="auth-links">
+                    <a href="#" id="backToLogin">&#8592; Back to sign in</a>
+                </div>
+                <p class="auth-terms">By clicking continue, you agree to our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<main class="main-content" id="mainContent">
+
+    <!-- ========== VIEW: PRODUCTS ========== -->
+    <div id="viewProducts" class="view active-view">
+        <div class="top-controls">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search Product Name..." autocomplete="off">
+                </div>
+            </div>
+            <div class="categories-wrapper">
+                <div class="cat-list" id="categoryList"></div>
+            </div>
+        </div>
+        <section class="products-main">
+            <div class="section-header">
+                <h1>Products</h1>
+                <p>Browse items from our community marketplace</p>
+            </div>
+            <div id="productsGridContainer" class="products-grid"></div>
+            <div class="pagination-footer">
+                <div class="showing-info" id="showingRangeInfo">Showing 1 to 5 of 12 results</div>
+                <div class="pagination-controls">
+                    <button class="page-btn" id="prevPageBtn" disabled><i class="fas fa-chevron-left"></i> Prev</button>
+                    <button class="page-btn" id="nextPageBtn">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ========== VIEW: SELL ========== -->
+    <div id="viewSell" class="view hidden-view">
+        <div class="sell-section">
+            <div class="sell-header">
+                <div class="sell-icon-wrap"><i class="fas fa-plus-circle"></i></div>
+                <h2>Sell Your Item</h2>
+                <p>List your product for others to buy</p>
+            </div>
+            <form id="sellForm" class="sell-form" novalidate>
+                <div class="field-group full-width">
+                    <label class="form-label"><span class="label-cap">PRODUCT IMAGE</span></label>
+                    <div class="image-upload-zone" id="imageUploadZone">
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <i class="fas fa-cloud-arrow-up"></i>
+                            <p>Click to upload or drag &amp; drop</p>
+                        </div>
+                        <img id="imagePreview" class="image-preview-thumb hidden" alt="Preview">
+                        <input type="file" id="productImage" accept="image/*" hidden>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-group">
+                        <label class="form-label" for="productName"><span class="label-cap">PRODUCT NAME</span></label>
+                        <input type="text" id="productName" class="field-input" placeholder="e.g., Wireless Headphones" required>
+                    </div>
+                    <div class="field-group">
+                        <label class="form-label" for="productCategory"><span class="label-cap">CATEGORY</span></label>
+                        <select id="productCategory" class="field-input" required>
+                            <option value="">Select Category</option>
+                            <option value="Home">Home</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Shirts">Shirts</option>
+                            <option value="Mens Wear">Mens Wear</option>
+                            <option value="Women Wear">Women Wear</option>
+                            <option value="Shoes">Shoes</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Books">Books</option>
+                            <option value="Stationery">Stationery</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="field-group">
+                        <label class="form-label" for="productPrice"><span class="label-cap">SELLING PRICE (R)</span></label>
+                        <input type="number" id="productPrice" class="field-input" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="field-group">
+                        <label class="form-label" for="productOriginalPrice"><span class="label-cap">ORIGINAL PRICE (R)</span></label>
+                        <input type="number" id="productOriginalPrice" class="field-input" step="0.01" min="0.01" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div class="field-group full-width">
+                    <label class="form-label" for="productDescription"><span class="label-cap">DESCRIPTION (OPTIONAL)</span></label>
+                    <textarea id="productDescription" class="field-input field-textarea" placeholder="Short description..." rows="4"></textarea>
+                </div>
+                <div id="sellFormMsg" class="auth-error hidden"></div>
+                <button type="submit" class="sell-submit-btn" id="sellSubmitBtn">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span class="btn-text">List Item for Sale</span>
+                    <span class="btn-spinner hidden"><i class="fas fa-circle-notch fa-spin"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== VIEW: ORDERS ========== -->
+    <div id="viewOrders" class="view hidden-view">
+        <div class="orders-section">
+            <div class="section-header">
+                <h1>Your Orders</h1>
+                <p>Track your purchases and activity</p>
+            </div>
+            <div class="orders-empty" id="ordersEmpty">
+                <i class="fas fa-box-open"></i>
+                <h3>No orders yet</h3>
+                <p>Browse products and make your first purchase!</p>
+                <button class="btn-filled" id="browseProductsBtn">Browse Products</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== VIEW: PRODUCT DETAIL ========== -->
+    <div id="viewDetail" class="view hidden-view">
+        <div class="detail-container">
+            <div class="breadcrumb" id="detailBreadcrumb">
+                <a href="#" id="backToProducts"><i class="fas fa-arrow-left"></i> Products</a>
+                <span class="breadcrumb-sep">/</span>
+                <span id="detailBreadcrumbName">Product</span>
+            </div>
+            <div class="detail-layout">
+                <div class="detail-gallery">
+                    <div class="gallery-main" id="galleryMain">
+                        <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                    </div>
+                    <div class="gallery-thumbs" id="galleryThumbs">
+                        <div class="thumb active"></div>
+                        <div class="thumb"></div>
+                        <div class="thumb"></div>
+                    </div>
+                </div>
+                <div class="detail-info">
+                    <div class="detail-category" id="detailCategory">CATEGORY</div>
+                    <h1 class="detail-title" id="detailTitle">Product Title</h1>
+                    <div class="detail-price-row">
+                        <span class="detail-price" id="detailPrice">R0.00</span>
+                        <span class="detail-original-price" id="detailOriginalPrice">R0.00</span>
+                        <span class="detail-discount-badge" id="detailDiscountBadge">0% OFF</span>
+                    </div>
+                    <p class="detail-description" id="detailDescription">Product description from seller. Brief overview of condition, key features, and any relevant notes about the listing.</p>
+                    <div class="detail-meta">
+                        <p>Seller: <strong id="detailSeller">user_handle</strong></p>
+                        <p>Listed: <strong id="detailListed">recently</strong></p>
+                    </div>
+                    <button class="btn-buy" id="detailBuyBtn"><i class="fas fa-bolt"></i> Buy Now</button>
+                    <button class="btn-wishlist" id="detailWishlistBtn"><i class="fas fa-heart"></i> + Add to Wishlist</button>
+                </div>
+            </div>
+            <div class="related-section">
+                <h2 class="related-title">RELATED PRODUCTS</h2>
+                <div class="related-grid" id="relatedGrid"></div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- TOAST NOTIFICATIONS -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="home.js"></script>
+</body>
+</html>

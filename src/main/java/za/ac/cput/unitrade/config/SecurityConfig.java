@@ -17,14 +17,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/", "/home.html", "/dashboard.html").permitAll()
+                        .requestMatchers("/home.css", "/home.js", "/dashboard.css", "/dashboard.js").permitAll()
+                        .requestMatchers("/logo.png", "/*.png", "/*.jpg", "/*.jpeg", "/*.ico", "/*.svg").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/fonts/**", "/webjars/**").permitAll()
+                        .anyRequest().authenticated())
 
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .permitAll()
-                );
+                        .permitAll());
 
         return http.build();
     }
@@ -34,3 +36,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
