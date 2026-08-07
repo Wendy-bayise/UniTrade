@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Checkout | UniTrade</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-mark">UT</div>
+        <div class="brand-name">Uni<span>Trade</span></div>
+    </div>
+    <div class="nav-links">
+        <a href="dashboard.html">Marketplace</a>
+        <a href="listings.html">My Listings</a>
+        <a href="messages.html">Messages</a>
+    </div>
+    <div class="nav-user">
+        <div class="user-greeting">Welcome, <strong id="userNameDisplay">Student</strong></div>
+        <a href="checkout.html" class="cart-link">
+            <i class="fas fa-bag-shopping"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <div class="avatar-chip" id="userAvatarInitial">S</div>
+        <a href="login.html" class="logout-link" id="logoutLink"><i class="fas fa-right-from-bracket"></i> Log out</a>
+    </div>
+</nav>
+<div class="id-stripe"></div>
+
+<div class="app-container">
+    <main class="products-main">
+        <div class="section-header">
+            <h1>Checkout</h1>
+            <p>Review your cart and complete your order</p>
+        </div>
+
+        <div class="checkout-layout">
+            <div id="cartItemsList" class="cart-items-list">
+
+            </div>
+
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="summarySubtotal">R0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <span id="summaryDelivery">R0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="summaryTotal">R0.00</span>
+                </div>
+                <button id="placeOrderBtn" class="place-order-btn" disabled>Place Order</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="common.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>
