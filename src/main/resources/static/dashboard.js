@@ -1,30 +1,8 @@
-// PRODUCT DATA
-let productsData = [
-    { id: 1, name: "Autos Wireless", price: 540.90, originalPrice: 600.00, category: "Home", isUserListed: false },
-    { id: 2, name: "Smart Watch PVR", price: 600.00, originalPrice: 1250.00, category: "Home", isUserListed: false },
-    { id: 3, name: "Controller Elite", price: 544.99, originalPrice: 850.00, category: "Home", isUserListed: false },
-    { id: 4, name: "AirPods Pro", price: 844.99, originalPrice: 850.00, category: "Home", isUserListed: false },
-    { id: 5, name: "AirPods Max", price: 843.99, originalPrice: 850.00, category: "Home", isUserListed: false },
-    { id: 6, name: "Classic Tee", price: 29.99, originalPrice: 49.99, category: "Shirts", isUserListed: false },
-    { id: 7, name: "Denim Jacket", price: 79.99, originalPrice: 129.99, category: "Mens Wear", isUserListed: false },
-    { id: 8, name: "Floral Dress", price: 59.99, originalPrice: 99.99, category: "Women Wear", isUserListed: false },
-    { id: 9, name: "Running Shoes", price: 89.99, originalPrice: 149.99, category: "Shoes", isUserListed: false },
-    { id: 10, name: "Leather Sofa", price: 499.99, originalPrice: 799.99, category: "Furniture", isUserListed: false },
-    { id: 11, name: "Smart Lamp", price: 39.99, originalPrice: 69.99, category: "Home", isUserListed: false },
-    { id: 12, name: "Casual Shorts", price: 34.99, originalPrice: 59.99, category: "Clothes", isUserListed: false }
-];
-
-let nextId = 13;
-
-
-const categoriesList = ["All", "Home", "Furniture", "Shirts", "Mens Wear", "Women Wear", "Shoes", "Clothes", "Electronics", "Accessories"];
-
-
+let productsData = [];
 let currentPage = 1;
 const itemsPerPage = 5;
 let currentCategory = "All";
 let currentSearchTerm = "";
-
 
 function getFilteredProducts() {
     let filtered = [...productsData];
@@ -42,15 +20,6 @@ function getPaginatedProducts(filteredProducts) {
     const startIdx = (currentPage - 1) * itemsPerPage;
     const endIdx = startIdx + itemsPerPage;
     return filteredProducts.slice(startIdx, endIdx);
-}
-
-function escapeHtml(str) {
-    return str.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-    });
 }
 
 function renderProducts() {
@@ -73,14 +42,18 @@ function renderProducts() {
         const hasDiscount = product.originalPrice > product.price;
         const isUserItem = product.isUserListed;
 
+        const imageMarkup = product.image
+            ? `<img src="${product.image}" alt="${escapeHtml(product.name)}" loading="lazy">`
+            : `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 7L12 12L4 7M20 7V17L12 22L4 17V7M20 7L12 2L4 7" stroke="#7188AE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 12V22M12 12L20 7M12 12L4 7" stroke="#7188AE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`;
+
         cardsHtml += `
       <div class="product-card">
         ${isUserItem ? '<div class="listing-badge"><i class="fas fa-user-plus"></i> Listed by You</div>' : ''}
         <div class="card-img">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 7L12 12L4 7M20 7V17L12 22L4 17V7M20 7L12 2L4 7" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 12V22M12 12L20 7M12 12L4 7" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          ${imageMarkup}
         </div>
         <div class="card-info">
           <div class="product-title">${escapeHtml(product.name)}</div>
@@ -89,12 +62,31 @@ function renderProducts() {
             ${hasDiscount ? `<span class="old-price">R${product.originalPrice.toFixed(2)}</span>` : ''}
           </div>
           ${hasDiscount ? `<div class="discount-badge">-${discountPercent}% OFF</div>` : '<div style="height:22px;"></div>'}
+          <div class="card-footer">
+            <button class="add-cart-btn" data-id="${product.id}"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+          </div>
         </div>
       </div>
     `;
     }
     container.innerHTML = cardsHtml;
     updatePaginationUI(totalFiltered);
+
+    container.querySelectorAll(".add-cart-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = parseInt(btn.dataset.id, 10);
+            const product = productsData.find(p => p.id === id);
+            if (!product) return;
+            addToCart(loadCart(), product);
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-check"></i> Added`;
+            btn.classList.add("added");
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove("added");
+            }, 1200);
+        });
+    });
 }
 
 function updatePaginationUI(totalFiltered) {
@@ -189,7 +181,6 @@ function initPaginationEvents() {
     }
 }
 
-
 function initSellForm() {
     const form = document.getElementById("sellForm");
     if (!form) return;
@@ -202,7 +193,6 @@ function initSellForm() {
         const price = parseFloat(document.getElementById("productPrice").value);
         const originalPrice = parseFloat(document.getElementById("productOriginalPrice").value);
 
-        // Validation
         if (!name || !category || isNaN(price) || isNaN(originalPrice)) {
             alert("Please fill in all fields correctly");
             return;
@@ -218,39 +208,32 @@ function initSellForm() {
             return;
         }
 
-
-        const newProduct = {
-            id: nextId++,
+        productsData = addProduct(productsData, {
             name: name,
             price: price,
             originalPrice: originalPrice,
             category: category,
-            isUserListed: true
-        };
-
-
-        productsData.unshift(newProduct);
-
+            image: "https://images.pexels.com/photos/7233931/pexels-photo-7233931.jpeg?auto=compress&cs=tinysrgb&w=400"
+        });
 
         form.reset();
-
 
         currentCategory = "All";
         currentSearchTerm = "";
         document.getElementById("searchInput").value = "";
         resetAndRender();
 
-
         document.querySelectorAll(".cat-btn").forEach(btn => btn.classList.remove("active"));
         const allBtn = Array.from(document.querySelectorAll(".cat-btn")).find(btn => btn.innerText.trim() === "All");
         if (allBtn) allBtn.classList.add("active");
-
 
         alert(`"${name}" has been listed for sale at R${price.toFixed(2)}!`);
     });
 }
 
 function init() {
+    productsData = loadProducts();
+    initNav();
     initCategoryFilters();
     initSearchListener();
     initPaginationEvents();

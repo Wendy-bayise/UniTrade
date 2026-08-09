@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Messages | UniTrade</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-mark">UT</div>
+        <div class="brand-name">Uni<span>Trade</span></div>
+    </div>
+    <div class="nav-links">
+        <a href="dashboard.html">Marketplace</a>
+        <a href="listings.html">My Listings</a>
+        <a href="messages.html" class="active">Messages</a>
+    </div>
+    <div class="nav-user">
+        <div class="user-greeting">Welcome, <strong id="userNameDisplay">Student</strong></div>
+        <a href="checkout.html" class="cart-link">
+            <i class="fas fa-bag-shopping"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <div class="avatar-chip" id="userAvatarInitial">S</div>
+        <a href="login.html" class="logout-link" id="logoutLink"><i class="fas fa-right-from-bracket"></i> Log out</a>
+    </div>
+</nav>
+<div class="id-stripe"></div>
+
+<div class="app-container">
+    <main class="products-main">
+        <div class="section-header">
+            <h1>Messages</h1>
+            <p>Chat with buyers and sellers about your listings</p>
+        </div>
+
+        <div class="messages-layout">
+            <div class="conversation-list" id="conversationList"></div>
+            <div class="chat-panel">
+                <div id="chatEmptyState" class="chat-empty-state">
+                    <i class="fas fa-comments fa-2x"></i>
+                    <p>Select a conversation to start chatting</p>
+                </div>
+                <div id="chatThread" class="chat-thread" style="display:none;">
+                    <div class="chat-header">
+                        <div class="conversation-avatar" id="chatHeaderAvatar"></div>
+                        <div>
+                            <div class="chat-header-name" id="chatHeaderName"></div>
+                            <div class="chat-header-context" id="chatHeaderContext"></div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <form class="message-form" id="chatInputForm">
+                        <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" required>
+                        <button type="submit" class="message-send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="common.js"></script>
+<script src="messages.js"></script>
+</body>
+</html>

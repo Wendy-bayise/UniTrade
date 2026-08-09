@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Listings | UniTrade</title>
+    <link rel="stylesheet" href="dashboard.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="brand">
+        <div class="brand-mark">UT</div>
+        <div class="brand-name">Uni<span>Trade</span></div>
+    </div>
+    <div class="nav-links">
+        <a href="dashboard.html">Marketplace</a>
+        <a href="listings.html" class="active">My Listings</a>
+        <a href="messages.html">Messages</a>
+    </div>
+    <div class="nav-user">
+        <div class="user-greeting">Welcome, <strong id="userNameDisplay">Student</strong></div>
+        <a href="checkout.html" class="cart-link">
+            <i class="fas fa-bag-shopping"></i>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <div class="avatar-chip" id="userAvatarInitial">S</div>
+        <a href="login.html" class="logout-link" id="logoutLink"><i class="fas fa-right-from-bracket"></i> Log out</a>
+    </div>
+</nav>
+<div class="id-stripe"></div>
+
+<div class="app-container">
+
+    <div class="listings-summary">
+        <div class="summary-card">
+            <i class="fas fa-boxes-stacked"></i>
+            <div>
+                <div class="summary-value" id="summaryCount">0</div>
+                <div class="summary-label">Items Listed</div>
+            </div>
+        </div>
+        <div class="summary-card">
+            <i class="fas fa-sack-dollar"></i>
+            <div>
+                <div class="summary-value" id="summaryValue">R0.00</div>
+                <div class="summary-label">Total Listed Value</div>
+            </div>
+        </div>
+        <a href="dashboard.html#sellForm" class="summary-card summary-cta">
+            <i class="fas fa-plus-circle"></i>
+            <div>
+                <div class="summary-value">List New</div>
+                <div class="summary-label">Add another item</div>
+            </div>
+        </a>
+    </div>
+
+    <main class="products-main">
+        <div class="section-header">
+            <h1>My Listings</h1>
+            <p>Items you have listed for sale on UniTrade</p>
+        </div>
+
+        <div id="myListingsGridContainer" class="products-grid">
+
+        </div>
+    </main>
+</div>
+
+<script src="common.js"></script>
+<script src="listings.js"></script>
+</body>
+</html>
