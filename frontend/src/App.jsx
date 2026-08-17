@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -13,11 +13,11 @@ import TermsPrivacy from './pages/TermsPrivacy';
 import CreateListing from './pages/CreateListing';
 import Messages from './pages/Messages';
 
-function App() {
+const MainLayout = () => {
   return (
-    <BrowserRouter>
-      <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
-        <ul style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', listStyle: 'none', padding: 0, margin: 0 }}>
+    <div className="layout-container">
+      <nav style={{ padding: '1rem', borderBottom: '1px solid var(--border)' }}>
+        <ul style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', listStyle: 'none', padding: 0, margin: 0, justifyContent: 'center' }}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/signup">Sign Up</Link></li>
@@ -33,12 +33,24 @@ function App() {
           <li><Link to="/messages">Messages</Link></li>
         </ul>
       </nav>
+      <main style={{ padding: '2rem', flexGrow: 1, boxSizing: 'border-box' }}>
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
-      <main style={{ padding: '2rem' }}>
-        <Routes>
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Auth routes without MainLayout (Full Screen) */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        
+        {/* All other routes with MainLayout */}
+        <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/search" element={<Search />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/cart" element={<Cart />} />
@@ -49,8 +61,8 @@ function App() {
           <Route path="/terms" element={<TermsPrivacy />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/messages" element={<Messages />} />
-        </Routes>
-      </main>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
