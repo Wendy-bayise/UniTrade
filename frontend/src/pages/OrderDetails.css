@@ -1,0 +1,254 @@
+.order-order-page {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 24px;
+   background: #F9FAFB;
+   min-height: 100vh;
+ }
+
+ .order-back-link {
+   color: #1B365D;
+   text-decoration: none;
+   font-size: 14px;
+   display: inline-block;
+   margin-bottom: 16px;
+ }
+
+ .order-back-link:hover {
+   text-decoration: underline;
+ }
+
+ .order-order-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   margin-bottom: 20px;
+ }
+
+ .order-order-header h1 {
+   color: #1B365D;
+   font-size: 26px;
+   margin: 0;
+ }
+
+ .order-badge {
+   background: #9fe5f7;
+   color: #060c5f;
+   padding: 4px 12px;
+   border-radius: 16px;
+   font-size: 14px;
+   font-weight: 600;
+   margin-left: 8px;
+ }
+
+ .order-order-date {
+   color: #6B7280;
+   font-size: 14px;
+   margin-top: 4px;
+ }
+
+ .order-header-btns {
+   display: flex;
+   gap: 10px;
+ }
+
+ .order-btn-primary {
+   background: #1B365D;
+   color: white;
+   border: none;
+   padding: 10px 18px;
+   border-radius: 6px;
+   cursor: pointer;
+   font-weight: 600;
+ }
+
+ .order-btn-outline {
+   background: white;
+   border: 1px solid #D1D5DB;
+   padding: 10px 18px;
+   border-radius: 6px;
+   cursor: pointer;
+ }
+
+ .order-btn-outline-small {
+   background: white;
+   border: 1px solid #D1D5DB;
+   padding: 8px 12px;
+   border-radius: 6px;
+   cursor: pointer;
+   width: 100%;
+   margin-top: 8px;
+ }
+
+ .order-card {
+   background: white;
+   padding: 20px;
+   border-radius: 8px;
+   border: 1px solid #E5E7EB;
+   margin-bottom: 16px;
+ }
+
+ .order-card h2,
+ .order-card h3 {
+   color: #1B365D;
+   margin-top: 0;
+   margin-bottom: 16px;
+   font-size: 18px;
+ }
+
+ .order-timeline {
+   display: flex;
+   align-items: flex-start;
+   margin: 24px 0;
+ }
+
+ .order-step {
+   text-align: center;
+   flex: 1;
+   font-size: 14px;
+ }
+
+ .order-circle {
+   width: 36px;
+   height: 36px;
+   border-radius: 50%;
+   background: #E5E7EB;
+   color: #6B7280;
+   margin: 0 auto 8px;
+   line-height: 36px;
+   font-weight: bold;
+ }
+
+ .order-step.order-done .order-circle {
+   background: #0d18b8;
+   color: white;
+ }
+
+ .order-line {
+   flex: 1;
+   height: 2px;
+   background: #0d18b8;
+   margin-top: 18px;
+ }
+
+ .order-line.order-done {
+   background: #0d18b8;
+ }
+
+ .order-info-banner {
+   background: #EFF6FF;
+   color: #1E40AF;
+   padding: 12px;
+   border-radius: 6px;
+   border-left: 3px solid #3B82F6;
+ }
+
+ .order-grid {
+   display: grid;
+   grid-template-columns: 2fr 1fr;
+   gap: 20px;
+ }
+
+ .order-item {
+   display: flex;
+   gap: 16px;
+   padding: 16px 0;
+   border-bottom: 1px solid #F3F4F6;
+ }
+
+ .order-item img {
+   width: 80px;
+   height: 80px;
+   object-fit: cover;
+   border-radius: 6px;
+   border: 1px solid #E5E7EB;
+ }
+
+ .order-item-info {
+   flex: 1;
+ }
+
+ .order-item-name {
+   font-weight: 600;
+   color: #1B365D;
+   margin: 0;
+ }
+
+ .order-item-sub {
+   color: #6B7280;
+   font-size: 14px;
+   margin: 4px 0;
+ }
+
+ .order-item-price {
+   font-weight: bold;
+   font-size: 16px;
+   color: #1B365D;
+ }
+
+ .order-msg-link {
+   color: #035fdf;
+   font-size: 14px;
+   text-decoration: none;
+ }
+
+ .order-msg-link:hover {
+   text-decoration: underline;
+ }
+
+ .order-safe-banner {
+   background: #f0f5fd;
+   border: 1px solid #bbd7f7;
+   padding: 12px;
+   border-radius: 6px;
+   margin-top: 16px;
+   font-size: 14px;
+   color: #070ad8;
+ }
+
+ .order-safe-banner span {
+   font-size: 12px;
+   color: #0a0db8;
+ }
+
+ .order-summary-row {
+   display: flex;
+   justify-content: space-between;
+   margin: 10px 0;
+   color: #374151;
+ }
+
+ .order-summary-total {
+   display: flex;
+   justify-content: space-between;
+   font-weight: bold;
+   font-size: 18px;
+   color: #1B365D;
+   border-top: 1px solid #E5E7EB;
+   padding-top: 10px;
+   margin-top: 10px;
+ }
+
+ .order-saved {
+   color: #1609d6;
+   font-size: 14px;
+   margin-top: 8px;
+ }
+
+ .order-pay-row {
+   display: flex;
+   justify-content: space-between;
+   margin: 8px 0;
+   font-size: 14px;
+ }
+
+ @media (max-width: 900px) {
+   .order-grid {
+     grid-template-columns: 1fr;
+   }
+
+   .order-order-header {
+     flex-direction: column;
+     gap: 12px;
+   }
+ }
